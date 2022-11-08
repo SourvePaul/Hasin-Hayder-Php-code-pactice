@@ -11,4 +11,4 @@ echo "We're living on ".$mean. "\n";
 printf(" We're living on %s\n", $mean);
 printf("%s is living on %s", strtoupper($name), strrev($mean));
 // two time '' use kortea holea '\' use kortea hobea
-?>
+
