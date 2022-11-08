@@ -26,3 +26,11 @@ $n = 43.563;
 printf("%06.1f",$m);
 echo "\n";
 printf("%06.1f",$n);
+
+echo "\n";
+
+//data return kortea sprintf() use hobea
+
+$name = "Rafi";
+$output = sprintf("My friend name is %s", $name);
+echo $output;
