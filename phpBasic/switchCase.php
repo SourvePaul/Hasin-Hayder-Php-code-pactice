@@ -79,3 +79,12 @@ switch($new) {
         echo "Eight Balls.";
         break;
 }
+
+echo "\n";
+
+//operator Presidency
+
+$e = false || true;
+$h = false or true;
+
+var_dump($e, $h);
