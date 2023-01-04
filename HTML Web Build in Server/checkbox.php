@@ -1,5 +1,7 @@
 <?php 
 header('X-XSS-Protection:0');
+
+require_once('function.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,8 +33,8 @@ header('X-XSS-Protection:0');
                 $lName = '';
                 $checked ='';
 
-                 if(isset($_REQUEST['cb1']) &&  $_REQUEST['cb1']==1 ) { 
-                    $lNcheckedame = 'checked';
+                 if(isset($_REQUEST['checked']) &&  $_REQUEST['checked']==1 ) { 
+                    $checked = 'checked';
                 }
             ?>
             <p>
@@ -64,8 +66,20 @@ header('X-XSS-Protection:0');
         <label for="lName">Last Name: </label>
         <input type="text" name="lName" id="lName" value="<?php echo $lName; ?>">
 
-        <input type="checkbox" name="cb1" id="cb1" value="1" <?php echo $checked; ?>>
-        <label for="cb1">Checked</label>
+        <input type="checkbox" name="checked" id="checked" value="1" <?php echo $checked; ?>>
+        <label for="checked" class="label-inline">Checked</label>
+
+        <label class="label">Select Some furits</label>
+
+        <input type="checkbox" name="fruits[]" value="orange" <?php isCHecked('fruits','orange') ?> >
+        <label class="label-inline">Orange</label> <br/>
+        <input type="checkbox" name="fruits[]" value="mango" <?php isCHecked('fruits','mango') ?> >
+        <label class="label-inline">Mango</label> <br/>
+        <input type="checkbox" name="fruits[]" value="lemon" <?php isCHecked('fruits','lemon') ?> >
+        <label class="label-inline">Lemon</label> <br/>
+        <input type="checkbox" name="fruits[]" value="banana" <?php isCHecked('fruits','banana') ?> >
+        <label class="label-inline">Banana</label> <br/>
+
 
         <button type="submit">Submit</button>
         </form>
