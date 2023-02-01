@@ -1,11 +1,11 @@
 <!-- <?php
-// require_once "inc/functions.php";
-// $info = '';
-// $task = $_GET['task'] ?? 'report';
-// if('seed' == $task) {
-//     seed();
-//     $info = "Seeding is complete.";
-// }
+require_once "inc/functions.php";
+$info = '';
+$task = $_GET['task'] ?? 'report';
+if('seed' == $task) {
+    seed();
+    $info = "Seeding is complete.";
+}
 ?> -->
 
 <!DOCTYPE html>
