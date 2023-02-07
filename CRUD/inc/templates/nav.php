@@ -1,5 +1,6 @@
 <p>
-    <a href="/CRUD/index.php?task=report">All Students</a> |
-    <a href="/CRUD/index.php?task=add">Add New Student</a> |
-    <a href="/CRUD/index.php?task=seed">Seed</a> 
+    <a href="index.php?task=report">All Students</a> |
+    <a href="index.php?task=add"> Add new student</a> |
+    <a href="index.php?task=seed"> Seed </a> |
+
 </p>
