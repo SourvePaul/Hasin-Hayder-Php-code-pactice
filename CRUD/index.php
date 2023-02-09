@@ -12,9 +12,9 @@ if(isset($_POST['submit'])) {
     $lname = filter_input(INPUT_POST, 'lname', FILTER_SANITIZE_STRING);
     $roll = filter_input(INPUT_POST, 'roll', FILTER_SANITIZE_STRING);
 
-    if($fname!='' && $lname!='' && $roll!='') {
+    if( $fname !='' && $lname !='' && $roll !='' ) {
         addStudent($fname, $lname, $roll);
-        header('location:index.php?task=report\n');
+        header('location:index.php?task=report');
     }
 }
 ?>
@@ -78,8 +78,8 @@ if(isset($_POST['submit'])) {
                     <input type="text" name="lname" id="lname">
 
                     <label for="roll">Roll: </label>
-                    <input type="number" name="roll" id="roll" placeholder="Enter the roll number...">
-                    <button type="submit" class="button-primary" value="save" name="submit"> Save</button>
+                    <input type="text" name="roll" id="age" placeholder="Enter the number...">
+                    <button type="submit" class="button-primary" name="submit"> Save</button>
                 </form>
             </div>
         </div>
