@@ -8,25 +8,25 @@ function seed()
             'id' => 1,
             'fname' => 'Rabiul',
             'lname' => 'Islam',
-            'roll' => '7',
+            'roll' => 7,
         ),
         array(
             'id' => 2,
             'fname' => 'Saimun',
             'lname' => 'Hossen',
-            'roll' => '11',
+            'roll' => 11,
         ),
         array(
             'id' => 3,
             'fname' => 'Nikil',
             'lname' => 'Condra',
-            'roll' => '10',
+            'roll' => 10,
         ),
         array(
             'id' => 4,
             'fname' => 'Hasan',
             'lname' => 'Islam',
-            'roll' => '8',
+            'roll' => 8,
         ),
     );
 
@@ -50,8 +50,10 @@ function generateReport() {
     foreach ($students as $student) {
         ?>
     <tr>
-        <td><?php printf("%s %s", $student['fname'], $student['lname']); ?></td>
-        <td><?php printf("%s", $student['roll']); ?></td>
+        <td><?php echo $student['fname'] .' '. $student['lname']; ?></td>
+        <!-- printf('%s %s', $student['fname'], $student['lname']); -->
+        <td><?php echo $student['roll']; ?></td>
+        <!-- printf('%s', $student['roll']); -->
         <td>
             <?php printf('<a href="index.php?task=edit&id=%s"> Edit </a> | <a href="index.php?task=delete&id=%s"> Delete </a>', $student['id'], $student['id'] ); ?>
 
@@ -72,10 +74,12 @@ function addStudent( $fname, $lname, $roll ) {
     $students = unserialize($serializedData);
     $newID = count($students) + 1;
     $student = array(
+        array(
         'id' => $newID,
         'fname' => $fname,
         'lname' => $lname,
         'roll' => $roll,
+        ),
     );
     array_push($students, $student);
     $serializedData = serialize($students);

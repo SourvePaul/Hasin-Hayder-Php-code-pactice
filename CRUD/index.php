@@ -70,17 +70,19 @@ if(isset($_POST['submit'])) {
         <?php if ('add' == $task): ?>
         <div class="row">
             <div class="column column-60 cloumn-offset-20">
-                <form action="index.php?report" method="POST">
-                    <label for="fname">First Name: </label>
-                    <input type="text" name="fname" id="fname">
+                <main>
+                    <form action="index.php?report" method="POST">
+                        <label for="fname">First Name: </label>
+                        <input type="text" name="fname" id="fname">
 
-                    <label for="lname">Last Name: </label>
-                    <input type="text" name="lname" id="lname">
+                        <label for="lname">Last Name: </label>
+                        <input type="text" name="lname" id="lname">
 
-                    <label for="roll">Roll: </label>
-                    <input type="text" name="roll" id="age" placeholder="Enter the number...">
-                    <button type="submit" class="button-primary" name="submit"> Save</button>
-                </form>
+                        <label for="roll">Roll: </label>
+                        <input type="text" name="roll" id="age" placeholder="Enter the number...">
+                        <button type="submit" class="button-primary" name="submit"> Save</button>
+                    </form>
+                </main>
             </div>
         </div>
         <?php endif; ?>
