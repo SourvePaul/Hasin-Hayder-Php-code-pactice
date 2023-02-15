@@ -2,22 +2,34 @@
 require_once "inc/functions.php";
 $info = '';
 $task = $_GET['task'] ?? 'report';
+$error = $_GET['error'] ?? '0';
 if('seed' == $task) {
     seed();
     $info = "Seeding is complete";
 }
-
+else{
+    $info = " Seeding is not complete";
+}
+$fname = '';
+$lname = '';
+$roll = '';
 if(isset($_POST['submit'])) {
     $fname = filter_input(INPUT_POST, 'fname', FILTER_SANITIZE_STRING);
     $lname = filter_input(INPUT_POST, 'lname', FILTER_SANITIZE_STRING);
     $roll = filter_input(INPUT_POST, 'roll', FILTER_SANITIZE_STRING);
 
     if( $fname !='' && $lname !='' && $roll !='' ) {
-        addStudent($fname, $lname, $roll);
-        header('location:index.php?task=report');
+        $result = addStudent( $fname, $lname, $roll );
+        if($result) {
+            header('location:index.php?task=report');
+        }else {
+            $error = 1;
+        }
+        
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,7 +61,7 @@ if(isset($_POST['submit'])) {
                     harum quasi saepe illum!</p>
 
                 <?php include_once('inc/templates/nav.php'); ?>
-                </hr>
+                <hr />
                 <?php 
                 if($info!='') {
                     echo "<p>{$info}</p>";
@@ -58,6 +70,16 @@ if(isset($_POST['submit'])) {
 
             </div>
         </div>
+
+        <?php if ('1' == $error): ?>
+        <div class="row">
+            <div class="column column-60 cloumn-offset-20">
+                <blockquote>
+                    Duplicate Roll Number
+                </blockquote>
+            </div>
+        </div>
+        <?php endif; ?>
 
         <?php if ('report' == $task): ?>
         <div class="row">
@@ -71,15 +93,17 @@ if(isset($_POST['submit'])) {
         <div class="row">
             <div class="column column-60 cloumn-offset-20">
                 <main>
-                    <form action="index.php?report" method="POST">
+                    <form action="index.php?task=add" method="POST">
                         <label for="fname">First Name: </label>
-                        <input type="text" name="fname" id="fname">
+                        <input type="text" name="fname" id="fname" value="<?php echo $fname; ?>">
 
                         <label for="lname">Last Name: </label>
-                        <input type="text" name="lname" id="lname">
+                        <input type="text" name="lname" id="lname" value="<?php echo $lname; ?>">
 
                         <label for="roll">Roll: </label>
-                        <input type="text" name="roll" id="age" placeholder="Enter the number...">
+                        <input type="number" name="roll" id="age" placeholder="Enter the number..."
+                            value="<?php echo $roll; ?>">
+
                         <button type="submit" class="button-primary" name="submit"> Save</button>
                     </form>
                 </main>
