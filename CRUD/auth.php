@@ -1,22 +1,46 @@
 <?php 
+session_name('mycrud');
 session_start([
     'cookie_lifetime' => 300 //5 mintutes
 ]);
 // session_destroy();
 $error = false;
 
-if(isset($_POST['username']) && isset($_POST['password'])) {
-    if( 'admin' == $_POST['username'] &&  'c0fa8441bb582911c0fba4afc7d224ac' == md5($_POST['password']) ) {
-            $_SESSION['loggedIn'] = true;
-    } else {
-        $error = true;
-        $_SESSION['loggedIn'] = false;
+$username = filter_input(INPUT_POST,'username',FILTER_SANITIZE_STRING);
+$password = filter_input(INPUT_POST,'password',FILTER_SANITIZE_STRING);
+
+$fp = fopen("E:\\xamp\\htdocs\\Hasin Hayder code pactice\\crud\\data\\users.txt", "r");
+//$fp = fopen(".\\data\\users.txt", "r");
+
+$_SESSION = array(
+    'loggedIn' => false // or true, depending on your needs
+  );
+
+if( $username && $password) {
+    
+    $_SESSION['loggedIn'] = false;
+    $_SESSION['user'] = false;
+    $_SESSION['role'] = false;
+
+    while($data = fgetcsv($fp)) {
+        if( $data[0] == $username &&  $data[1] == md5($password) ) {
+                $_SESSION['loggedIn'] = true;
+                $_SESSION['user'] = $username;
+                $_SESSION['role'] = $data[2];
+                header('location:index.php?task=report');
+        }
     }
+    if(!$_SESSION['loggedIn']) {
+        $error = true;
+    } 
 }
 
-if(isset($_POST['logout'])) {
+if(isset($_GET['logout'])) {
     $_SESSION['loggedIn'] = false;
+    $_SESSION['user'] = false;
+    $_SESSION['role'] = false;
     session_destroy();
+    header('location:index.php');
 }
 ?>
 <!DOCTYPE html>
