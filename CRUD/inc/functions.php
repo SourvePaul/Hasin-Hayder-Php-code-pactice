@@ -1,5 +1,4 @@
 <?php
-
 define('DB_NAME','E:\\xamp\\htdocs\\Hasin Hayder code pactice\\crud\\data\\db.txt');
 function seed()
 {
@@ -43,7 +42,9 @@ function generateReport() {
     <tr>
         <th>Name: </th>
         <th>Roll: </th>
+        <?php if(isAdmin() || isEditor()): ?>
         <th width="25%">Action</th>
+        <?php endif; ?>
     </tr>
 
     <?php
@@ -54,10 +55,17 @@ function generateReport() {
         <!--  echo $student['fname'] .' '. $student['lname']; -->
         <td><?php printf('%s', $student['roll']); ?></td>
         <!--  echo $student['roll']; -->
+
+        <?php if(isAdmin()): ?>
         <td>
             <?php printf('<a href="index.php?task=edit&id=%s"> Edit </a> | <a class="delete" href="index.php?task=delete&id=%s"> Delete </a>', $student['id'], $student['id'] ); ?>
-
         </td>
+        <?php elseif(isEditor()): ?>
+        <td>
+            <?php printf('<a href="index.php?task=edit&id=%s"> Edit </a>', $student['id'] ); ?>
+        </td>
+        <?php endif; ?>
+
     </tr>
     <?php
     }
@@ -143,4 +151,16 @@ function deleteStudent($id) {
 function getNewId($students) {
     $maxId = max(array_column($students, 'id'));
     return $maxId + 1;
+}
+
+function isAdmin() {
+    return ('admin' == $_SESSION['role']);
+}
+
+function isEditor() {
+    return ('editor' == $_SESSION['role']);
+}
+
+function hasPrivilege() {
+    return (isAdmin() || isEditor());
 }
